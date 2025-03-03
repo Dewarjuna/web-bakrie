@@ -1,0 +1,15 @@
+{
+    "name": "dewa/webbakrie",
+    "autoload": {
+        "psr-4": {
+            "Dewa\\Webbakrie\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Dewarjuna",
+            "email": "hehe31134@gmail.com"
+        }
+    ],
+    "require": {}
+}
