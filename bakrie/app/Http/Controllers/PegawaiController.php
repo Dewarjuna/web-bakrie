@@ -60,7 +60,7 @@ class PegawaiController extends Controller
      */
     public function show(Pegawai $pegawai)
     {
-        return view('pegawai.show');
+        return view('pegawai.show', compact('pegawai'));
     }
 
     /**
@@ -68,7 +68,7 @@ class PegawaiController extends Controller
      */
     public function edit(Pegawai $pegawai)
     {
-        return view('pegawai.edit');
+        return view('pegawai.edit', compact('pegawai'));
     }
 
     /**
@@ -76,7 +76,29 @@ class PegawaiController extends Controller
      */
     public function update(Request $request, Pegawai $pegawai)
     {
-        //
+        $request->validate(
+            [
+                'nama' => 'required|string|max:255',
+                'kelamin' => 'required|string|max:255',
+                'jabatan' => 'required|string|max:255',
+                'tglaktif_jabatan' => 'required|string|max:255',
+                'tglmasuk_jabatan' => 'required|string|max:255',
+                'status' => 'required|string|max:255',
+                'isactive' => 'required|string|max:255',
+            ]
+            );
+
+            Pegawai::update([
+                'nama' => $request->nama,
+                'kelamin' => $request->kelamin,
+                'jabatan' => $request->jabatan,
+                'tglaktif_jabatan' => $request->tglaktif_jabatan,
+                'tglmasuk_jabatan' => $request->tglmasuk_jabatan,
+                'status' => $request->status,
+                'isactive' => $request->isactive,
+            ]);
+
+            return redirect('/pegawai')->with('status', 'Data pegawai berhasil dirubah');
     }
 
     /**
@@ -84,6 +106,7 @@ class PegawaiController extends Controller
      */
     public function destroy(Pegawai $pegawai)
     {
-        //
+        $pegawai->delete();
+        return redirect('/pegawai')->with('status','Data Pegawai telah dihapus');
     }
 }

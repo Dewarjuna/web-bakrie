@@ -38,7 +38,10 @@
                                     <td>
                                         <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-success">Edit</a>
                                         <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-success">Show</a>
-                                        <a href="{{ route('pegawai.destroy', $pegawai->id) }}" class="btn btn-success">Delete</a>
+                                        <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger">Delete</button>
                                     </td>
                                 </tr>
                                 @endforeach
