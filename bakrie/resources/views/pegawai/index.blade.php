@@ -7,8 +7,11 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>LAPORAN DATA PEGAWAI
+                            @if (Auth::guard('admin')->check())
                             <a href="{{ url('pegawai/create') }}" class="btn btn-primary float-end">Add New Pegawai</a>
+                            @endif
                         </h4>
+                        <a href="{{ url('dashboard') }}">Dashboard</a>
                     </div>
                     <div class="card-body">
                         <table class="table table-stiped table-bordered">
@@ -35,6 +38,7 @@
                                     <td>{{$pegawai->tglmasuk_jabatan}}</td>
                                     <td>{{$pegawai->status}}</td>
                                     <td>{{$pegawai->isactive}}</td>
+                                    @if (Auth::guard('admin')->check())
                                     <td>
                                         <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-success">Edit</a>
                                         <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-success">Show</a>
@@ -43,6 +47,7 @@
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
                                     </td>
+                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>
