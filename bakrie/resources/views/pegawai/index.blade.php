@@ -42,16 +42,20 @@
                                     <td>{{$pegawai->tglmasuk_jabatan}}</td>
                                     <td>{{$pegawai->status}}</td>
                                     <td>{{$pegawai->isactive}}</td>
-                                    @if (Auth::guard('admin')->check())
+                                    
                                     <td>
+                                        @if (Auth::guard('admin')->check())
                                         <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-success">Edit</a>
+                                        @endif
                                         <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-success">Show</a>
+                                        @if (Auth::guard('admin')->check())
                                         <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger">Delete</button>
+                                        @endif
                                     </td>
-                                    @endif
+                                    
                                 </tr>
                                 @endforeach
                             </tbody>
