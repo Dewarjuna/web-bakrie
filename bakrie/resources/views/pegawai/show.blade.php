@@ -21,7 +21,7 @@
                         <div class="mb-3">
                             <label>Nama</label>
                             <p>
-                                {!! $pegawai->name !!}
+                                {!! $pegawai->nama !!}
                             </p>
                         </div>
                         <div class="mb-3">

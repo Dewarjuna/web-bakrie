@@ -109,4 +109,9 @@ class PegawaiController extends Controller
         $pegawai->delete();
         return redirect('/pegawai')->with('status','Data Pegawai telah dihapus');
     }
+
+    //public function dashboard(Pegawai $pegawai)
+    //{
+    //    return view('admin.dashboard', compact('pegawai'));
+    //}
 }

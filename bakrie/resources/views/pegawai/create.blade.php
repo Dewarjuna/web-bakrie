@@ -13,6 +13,14 @@
                             @csrf
 
                             <div class="mb-3">
+                                <label>NIP</label>
+                                <input type="text" name="id" class="form-control">
+                                @error('id')
+                                    <span class="text-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+
+                            <div class="mb-3">
                                 <label>Nama</label>
                                 <input type="text" name="nama" class="form-control">
                                 @error('nama')
