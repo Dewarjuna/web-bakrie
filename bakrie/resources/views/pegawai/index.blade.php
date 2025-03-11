@@ -11,7 +11,11 @@
                             <a href="{{ url('pegawai/create') }}" class="btn btn-primary float-end">Add New Pegawai</a>
                             @endif
                         </h4>
-                        <a href="{{ url('dashboard') }}">Dashboard</a>
+                        @if (Auth::guard('admin')->check())
+                            <a href="{{ url('admin/dashboard') }}">Dashboard</a>
+                        @else
+                            <a href="{{ url('dashboard') }}">Dashboard</a>
+                        @endif
                     </div>
                     <div class="card-body">
                         <table class="table table-stiped table-bordered">
