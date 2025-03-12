@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pegawai', function (Blueprint $table) {
             $table->id();
+            $table->string('nip')->nullable();
             $table->string('nama')->nullable();
             $table->string('kelamin')->nullable();
             $table->string('jabatan')->nullable();

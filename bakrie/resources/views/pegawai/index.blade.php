@@ -34,7 +34,7 @@
                             <tbody>
                                 @foreach ($pegawai as $pegawai)
                                 <tr>
-                                    <td>{{$pegawai->id}}</td>
+                                    <td>{{$pegawai->nip}}</td>
                                     <td>{{$pegawai->nama}}</td>
                                     <td>{{$pegawai->kelamin}}</td>
                                     <td>{{$pegawai->jabatan}}</td>

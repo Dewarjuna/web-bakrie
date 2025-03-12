@@ -15,7 +15,7 @@
                         <div class="mb-3">
                             <label>NIP</label>
                             <p>
-                                {{ $pegawai->id }}
+                                {{ $pegawai->nip }}
                             </p>
                         </div>
                         <div class="mb-3">

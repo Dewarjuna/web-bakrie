@@ -32,6 +32,7 @@ class PegawaiController extends Controller
     {
         $request->validate(
             [
+                'nip' => 'required|string|max:255',
                 'nama' => 'required|string|max:255',
                 'kelamin' => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
@@ -43,6 +44,7 @@ class PegawaiController extends Controller
             );
 
             Pegawai::create([
+                'nip' => $request->nip,
                 'nama' => $request->nama,
                 'kelamin' => $request->kelamin,
                 'jabatan' => $request->jabatan,
@@ -78,6 +80,7 @@ class PegawaiController extends Controller
     {
         $request->validate(
             [
+                'nip' => 'required|string|max:255',
                 'nama' => 'required|string|max:255',
                 'kelamin' => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
@@ -89,6 +92,7 @@ class PegawaiController extends Controller
             );
 
             Pegawai::update([
+                'nip' => $request->nip,
                 'nama' => $request->nama,
                 'kelamin' => $request->kelamin,
                 'jabatan' => $request->jabatan,

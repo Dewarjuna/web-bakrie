@@ -14,8 +14,8 @@
 
                             <div class="mb-3">
                                 <label>NIP</label>
-                                <input type="text" name="id" class="form-control">
-                                @error('id')
+                                <input type="text" name="nip" class="form-control">
+                                @error('nip')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
