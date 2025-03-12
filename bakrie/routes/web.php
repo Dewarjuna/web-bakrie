@@ -13,14 +13,20 @@ Route::get('/', function () {
 //Route::resource('pegawai', PegawaiController::class);
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $totalActive = \App\Models\Pegawai::where('isactive', 'active')->count();
+    $totalMale   = \App\Models\Pegawai::where('isactive', 'active')->where('kelamin', 'Laki-laki')->count();
+    $totalFemale = \App\Models\Pegawai::where('isactive', 'active')->where('kelamin', 'Perempuan')->count();
+
+    return view('dashboard', compact('totalActive', 'totalMale', 'totalFemale'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth:admin,web'])->group(function () {
+    //Route::get('/admin/dashboard', [PegawaiController::class, 'dashboard']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::resource('pegawai', PegawaiController::class);
 });
+
 require __DIR__.'/admin-auth.php';
 require __DIR__.'/auth.php';

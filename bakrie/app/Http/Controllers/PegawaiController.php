@@ -110,8 +110,20 @@ class PegawaiController extends Controller
         return redirect('/pegawai')->with('status','Data Pegawai telah dihapus');
     }
 
-    //public function dashboard(Pegawai $pegawai)
-    //{
-    //    return view('admin.dashboard', compact('pegawai'));
-    //}
+    public function dashboard()
+{
+    // Hitung total pegawai yang aktif (misalnya isactive = '1' menandakan aktif)
+    $totalActive = Pegawai::where('isactive', 'Active')->count();
+
+    // Hitung pegawai aktif berdasarkan jenis kelamin
+    $totalMale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Laki-laki')->count();
+    $totalFemale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Perempuan')->count();
+
+    // Hitung karyawan permanen dan kontrak (sesuaikan nilai status sesuai database, misalnya 'permanen' dan 'kontrak')
+    $totalPermanen = Pegawai::where('status', 'permanen')->count();
+    $totalKontrak = Pegawai::where('status', 'kontrak')->count();
+
+    return view('admin.dashboard', compact('totalActive', 'totalMale', 'totalFemale', 'totalPermanen', 'totalKontrak'));
+}
+
 }

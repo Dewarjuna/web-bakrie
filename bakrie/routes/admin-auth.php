@@ -16,18 +16,13 @@ Route::prefix('admin')->middleware('guest:admin')->group(function () {
 
 });
 
+//Route::get('/admin/dashboard', [PegawaiController::class, 'dashboard']);
+
 
 Route::prefix('admin')->middleware('auth:admin')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/dashboard', [PegawaiController::class, 'dashboard'])->name('admin.dashboard');
 
-    //Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    //Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    //Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    //Route::resource('pegawai', PegawaiController::class);
-
+    // Route lainnya...
     Route::post('logout', [LoginController::class, 'destroy'])->name('admin.logout');
-
 });
