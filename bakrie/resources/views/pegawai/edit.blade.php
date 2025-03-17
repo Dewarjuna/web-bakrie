@@ -80,13 +80,22 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>IsActive</label>
-                                <input type="text" name="isactive" class="form-control" 
-                                    value="{{ old('isactive', $pegawai->isactive) }}">
+                                <label>Active?</label>
+                                <div class="form-check">
+                                    <input type="radio" id="active" name="isactive" value="active" 
+                                        class="form-check-input" {{ old('isactive', $pegawai->isactive ?? '') == 'active' ? 'checked' : '' }}>
+                                    <label for="active" class="form-check-label">Active</label>
+                                </div>
+                                <div class="form-check">
+                                    <input type="radio" id="nonactive" name="isactive" value="non active" 
+                                        class="form-check-input" {{ old('isactive', $pegawai->isactive ?? '') == 'non active' ? 'checked' : '' }}>
+                                    <label for="nonactive" class="form-check-label">Non Active</label>
+                                </div>
                                 @error('isactive')
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+                            
 
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Simpan</button>
