@@ -36,8 +36,8 @@ class PegawaiController extends Controller
                 'nama' => 'required|string|max:255',
                 'kelamin' => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
-                'tglaktif_jabatan' => 'required|string|max:255',
-                'tglmasuk_jabatan' => 'required|string|max:255',
+                'tglaktif_jabatan' => 'required|date',
+                'tglmasuk_jabatan' => 'required|date',
                 'status' => 'required|string|max:255',
                 'isactive' => 'required|string|max:255',
             ]
@@ -84,14 +84,14 @@ class PegawaiController extends Controller
                 'nama' => 'required|string|max:255',
                 'kelamin' => 'required|string|max:255',
                 'jabatan' => 'required|string|max:255',
-                'tglaktif_jabatan' => 'required|string|max:255',
-                'tglmasuk_jabatan' => 'required|string|max:255',
+                'tglaktif_jabatan' => 'required|date',
+                'tglmasuk_jabatan' => 'required|date',
                 'status' => 'required|string|max:255',
                 'isactive' => 'required|string|max:255',
             ]
             );
 
-            Pegawai::update([
+            $pegawai->update([
                 'nip' => $request->nip,
                 'nama' => $request->nama,
                 'kelamin' => $request->kelamin,

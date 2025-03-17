@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('nama')->nullable();
             $table->string('kelamin')->nullable();
             $table->string('jabatan')->nullable();
-            $table->string('tglaktif_jabatan')->nullable();
-            $table->string('tglmasuk_jabatan')->nullable();
+            $table->date('tglaktif_jabatan')->nullable();
+            $table->date('tglmasuk_jabatan')->nullable();
             $table->string('status')->nullable();
             $table->string('isactive')->nullable();
             $table->timestamps();
