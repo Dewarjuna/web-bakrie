@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\DB;
 use App\Models\Pegawai;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,19 @@ class PegawaiController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
-        $pegawais = Pegawai::paginate(10);
-        return view('pegawai.index', ['pegawai' => $pegawais]);
-        
-    }
+{
+    $pegawais = Pegawai::select('pegawai.*')
+        ->join(
+            DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+            function($join) {
+                $join->on('pegawai.nip', '=', 'latest.nip')
+                     ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+            }
+        )
+        ->paginate(10);
+
+    return view('pegawai.index', ['pegawai' => $pegawais]);
+}
 
     /**
      * Show the form for creating a new resource.
@@ -61,9 +70,14 @@ class PegawaiController extends Controller
      * Display the specified resource.
      */
     public function show(Pegawai $pegawai)
-    {
-        return view('pegawai.show', compact('pegawai'));
-    }
+{
+    // Ambil seluruh data jabatan berdasarkan NIP (urutkan jika perlu)
+    $history = Pegawai::where('nip', $pegawai->nip)
+                      ->orderBy('tglmasuk_jabatan', 'asc')
+                      ->get();
+
+    return view('pegawai.show', compact('pegawai', 'history'));
+}
 
     /**
      * Show the form for editing the specified resource.
@@ -116,18 +130,26 @@ class PegawaiController extends Controller
 
     public function dashboard()
 {
-    // Hitung total pegawai yang aktif (misalnya isactive = '1' menandakan aktif)
+    
     $totalActive = Pegawai::where('isactive', 'Active')->count();
 
     // Hitung pegawai aktif berdasarkan jenis kelamin
     $totalMale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Laki-laki')->count();
     $totalFemale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Perempuan')->count();
 
-    // Hitung karyawan permanen dan kontrak (sesuaikan nilai status sesuai database, misalnya 'permanen' dan 'kontrak')
-    $totalPermanen = Pegawai::where('status', 'permanen')->count();
-    $totalKontrak = Pegawai::where('status', 'kontrak')->count();
+    // Hitung karyawan permanen dan kontrak
+    $totalPermanen = Pegawai::where('status', 'permanen')->where('isactive', 'Active')->count();
+    $totalKontrak = Pegawai::where('status', 'kontrak')->where('isactive', 'Active')->count();
 
     return view('admin.dashboard', compact('totalActive', 'totalMale', 'totalFemale', 'totalPermanen', 'totalKontrak'));
+}
+
+public function history($nip)
+{
+    // Mengambil semua data jabatan dengan NIP tertentu dan mengurutkan berdasarkan tanggal aktif jabatan
+    $histories = Pegawai::where('nip', $nip)->orderBy('tglaktif_jabatan', 'asc')->get();
+
+    return view('pegawai.history', compact('histories'));
 }
 
 }

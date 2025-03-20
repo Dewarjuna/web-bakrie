@@ -45,14 +45,19 @@
                                     
                                     <td>
                                         @if (Auth::guard('admin')->check())
-                                        <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-success">Edit</a>
+                                            <a href="{{ route('pegawai.edit', $pegawai->id) }}" class="btn btn-success">Edit</a>
                                         @endif
                                         <a href="{{ route('pegawai.show', $pegawai->id) }}" class="btn btn-success">Show</a>
                                         @if (Auth::guard('admin')->check())
-                                        <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        <!-- Tombol untuk kelola jabatan lama -->
+                                        <a href="{{ route('pegawai.history', $pegawai->nip) }}" class="btn btn-info">Kelola Jabatan</a>
+                                        @endif
+                                        @if (Auth::guard('admin')->check())
+                                            <form action="{{ route('pegawai.destroy', $pegawai->id) }}" method="POST" class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
                                         @endif
                                     </td>
                                     
