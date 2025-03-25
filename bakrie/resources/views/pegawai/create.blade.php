@@ -59,7 +59,7 @@
 
                             <!-- Tanggal Masuk Jabatan -->
                             <div class="mb-3">
-                                <label>Tanggal Masuk Jabatan</label>
+                                <label>Tanggal Masuk</label>
                                 <input type="text" id="tglmasuk_jabatan" name="tglmasuk_jabatan" class="form-control" placeholder="YYYY-MM-DD contoh: 2002-06-25">
                                 @error('tglmasuk_jabatan')
                                     <span class="text-danger">{{ $message }}</span>

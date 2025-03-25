@@ -9,7 +9,7 @@
             <tr>
                 <th>Jabatan</th>
                 <th>Tanggal Aktif Jabatan</th>
-                <th>Tanggal Masuk Jabatan</th>
+                <th>Tanggal Masuk</th>
                 <th>Status Karyawan</th>
                 <th>Is Active</th>
                 <th>Aksi</th>

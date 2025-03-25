@@ -26,6 +26,8 @@ Route::middleware(['auth:admin,web'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/pegawai/{nip}/history', [PegawaiController::class, 'history'])->name('pegawai.history');
+    Route::get('/pegawai/{nip}/newjabatan', [PegawaiController::class, 'newJabatan'])->name('pegawai.newjabatan');
+    Route::post('/pegawai/newjabatan', [PegawaiController::class, 'storeNewJabatan'])->name('pegawai.storeNewJabatan');
     Route::resource('pegawai', PegawaiController::class);
 });
 
