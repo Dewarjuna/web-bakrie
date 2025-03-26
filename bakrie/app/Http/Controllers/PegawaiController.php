@@ -9,9 +9,7 @@ use Carbon\Carbon;
 
 class PegawaiController extends Controller
 {
-    // ... other methods (index, create, store, show, edit, update, destroy, history, dashboard) ...
-
-    /**
+        /**
      * Display a listing of the resource.
      */
     public function index()
@@ -159,7 +157,7 @@ class PegawaiController extends Controller
             // Retrieve the existing employee record to keep the original "tanggal masuk"
             $existingPegawai = Pegawai::where('nip', $request->nip)->first();
 
-            // Ensure that there is an existing record
+            // Ensuring an existing record
             if (!$existingPegawai) {
                 abort(404, 'Employee not found');
             }

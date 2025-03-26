@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Ubah Data Pegawai</h4>
+                        <a href="{{ url('pegawai') }}" class="btn btn-danger float-start">Back</a>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('pegawai.update', $pegawai->id) }}" method="POST">
@@ -62,7 +63,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label>Tanggal Masuk Jabatan</label>
+                                <label>Tanggal Masuk</label>
                                 <input type="text" id="tglmasuk_jabatan" name="tglmasuk_jabatan" class="form-control" 
                                     value="{{ old('tglmasuk_jabatan', $pegawai->tglmasuk_jabatan) }}" placeholder="YYYY-MM-DD">
                                 @error('tglmasuk_jabatan')

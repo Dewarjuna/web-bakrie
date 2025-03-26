@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h4>Riwayat Jabatan - {{ $histories->first()->nama ?? 'Pegawai' }}</h4>
-    <a href="{{ url('pegawai') }}" class="btn btn-danger mb-3">Kembali</a>
+    <a href="{{ url('pegawai') }}" class="btn btn-danger float-start">Back</a>
     <table class="table table-bordered">
         <thead>
             <tr>

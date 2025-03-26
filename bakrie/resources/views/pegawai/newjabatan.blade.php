@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h4>Tambah Jabatan Baru untuk {{ $pegawai->nama }}</h4>
-    <a href="{{ url('pegawai') }}" class="btn btn-danger mb-3">Kembali</a>
+    <a href="{{ url('pegawai') }}" class="btn btn-danger mb-3">Back</a>
     
     <form action="{{ route('pegawai.storeNewJabatan') }}" method="POST">
         @csrf

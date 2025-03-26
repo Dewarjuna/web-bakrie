@@ -7,6 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <h4>Masukkan data Pegawai</h4>
+                        <a href="{{ url('pegawai') }}" class="btn btn-danger float-start">Back</a>
                     </div>
                     <div class="card-body">
                         <form action="{{ route('pegawai.store') }}" method="POST">
