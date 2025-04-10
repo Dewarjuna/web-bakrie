@@ -113,11 +113,43 @@ class PegawaiController extends Controller
 
     public function dashboard()
     {
-        $totalActive = Pegawai::where('isactive', 'Active')->count();
-        $totalMale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Laki-laki')->count();
-        $totalFemale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Perempuan')->count();
-        $totalPermanen = Pegawai::where('status', 'permanen')->where('isactive', 'Active')->count();
-        $totalKontrak = Pegawai::where('status', 'kontrak')->where('isactive', 'Active')->count();
+        // 
+        $totalActive = Pegawai::where('isactive', 'Active')
+            ->join(
+                DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+                function($join) {
+                    $join->on('pegawai.nip', '=', 'latest.nip')
+                         ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+                }
+            )->count();
+        $totalMale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Laki-laki')->join(
+            DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+            function($join) {
+                $join->on('pegawai.nip', '=', 'latest.nip')
+                     ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+            }
+        )->count();
+        $totalFemale = Pegawai::where('isactive', 'Active')->where('kelamin', 'Perempuan')->join(
+            DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+            function($join) {
+                $join->on('pegawai.nip', '=', 'latest.nip')
+                     ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+            }
+        )->count();
+        $totalPermanen = Pegawai::where('status', 'permanen')->where('isactive', 'Active')->join(
+            DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+            function($join) {
+                $join->on('pegawai.nip', '=', 'latest.nip')
+                     ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+            }
+        )->count();
+        $totalKontrak = Pegawai::where('status', 'kontrak')->where('isactive', 'Active')->join(
+            DB::raw('(SELECT nip, MAX(tglaktif_jabatan) as max_tgl FROM pegawai GROUP BY nip) as latest'),
+            function($join) {
+                $join->on('pegawai.nip', '=', 'latest.nip')
+                     ->on('pegawai.tglaktif_jabatan', '=', 'latest.max_tgl');
+            }
+        )->count();
 
         return view('admin.dashboard', compact('totalActive', 'totalMale', 'totalFemale', 'totalPermanen', 'totalKontrak'));
     }

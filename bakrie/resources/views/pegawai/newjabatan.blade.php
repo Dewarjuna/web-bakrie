@@ -53,3 +53,16 @@
         // });
     </script>
 @endsection
+
+@section('scripts')
+    <!-- If using Flatpickr for date selection, include and initialize it -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#tglaktif_jabatan", {
+            dateFormat: "Y-m-d"
+        });
+        flatpickr("#tglmasuk_jabatan", {
+            dateFormat: "Y-m-d"
+        });
+    </script>
+@endsection
